@@ -1,0 +1,158 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 40% 8%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 40% 8%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 5%;
+
+    --secondary: 263 70% 58%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 60%;
+
+    --accent: 217 91% 72%;
+    --accent-foreground: 222 47% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 20% 18%;
+    --input: 222 20% 18%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 222 40% 6%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 222 30% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 222 20% 18%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(263 70% 58%));
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60% / 0.15), hsl(263 70% 58% / 0.15));
+    --gradient-cta: linear-gradient(135deg, hsl(217 91% 60%), hsl(263 70% 58%), hsl(217 91% 60%));
+    --glow-primary: 0 0 40px hsl(217 91% 60% / 0.3);
+    --glow-accent: 0 0 60px hsl(263 70% 58% / 0.2);
+    --glass-bg: hsl(222 40% 8% / 0.6);
+    --glass-border: hsl(222 20% 18% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .gradient-bg {
+    background-image: var(--gradient-primary);
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+  }
+
+  .glow-button {
+    background-image: var(--gradient-primary);
+    box-shadow: var(--glow-primary);
+    transition: all 0.3s ease;
+  }
+  .glow-button:hover {
+    box-shadow: 0 0 50px hsl(217 91% 60% / 0.5);
+    transform: scale(1.05);
+  }
+
+  .nav-solid {
+    background: hsl(222 47% 5% / 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid hsl(222 20% 18% / 0.5);
+  }
+
+  .blob-gradient {
+    background: radial-gradient(circle at 50% 50%, hsl(217 91% 60% / 0.3), hsl(263 70% 58% / 0.2), transparent 70%);
+    filter: blur(60px);
+    animation: blob-float 8s ease-in-out infinite;
+  }
+
+  .counter-stat {
+    font-family: 'Space Grotesk', monospace;
+  }
+
+  .input-focus-effect {
+    @apply transition-all duration-300;
+  }
+  .input-focus-effect:focus {
+    box-shadow: 0 0 0 2px hsl(217 91% 60% / 0.3);
+    border-color: hsl(217 91% 60% / 0.6);
+  }
+}
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -20px) scale(1.05); }
+  66% { transform: translate(-10px, 15px) scale(0.95); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
