@@ -97,7 +97,7 @@ const Footer = () => {
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin size={20} className="mt-1 shrink-0" /> 
                 <span className="leading-relaxed">
-                  5th floor, Bait ar Rahma, Shaikpet, Hyderabad, Telangana-500008
+                  5th floor, Bait al Rahma, Shaikpet, Hyderabad, Telangana-500008
                 </span>
               </div>
             </div>
