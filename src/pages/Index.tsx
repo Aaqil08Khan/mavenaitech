@@ -13,37 +13,37 @@ const services = [
     icon: Brain, title: "AI Solutions",
     desc: "Custom machine learning models and intelligent automation tailored to your business needs.",
     color: "#6366f1",
-    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80",
+    image: "/images/brainimage.jpg",
   },
   {
     icon: Globe, title: "Web Development",
     desc: "Modern, performant web applications built with cutting-edge frameworks and technologies.",
     color: "#8b5cf6",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80",
+    image: "/images/globalwebdevelopment.jpg",
   },
   {
     icon: Cloud, title: "Cloud Services",
     desc: "Scalable cloud infrastructure and migration strategies for seamless digital operations.",
     color: "#06b6d4",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80",
+    image: "/images/cloudservice.jpg",
   },
   {
     icon: BarChart3, title: "Data Analytics",
     desc: "Transform raw data into actionable insights with advanced analytics and visualization.",
     color: "#10b981",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+    image: "/images/dataanalyst.jpg",
   },
   {
     icon: Shield, title: "Cybersecurity",
     desc: "Protect your digital assets with comprehensive security solutions and monitoring.",
     color: "#f59e0b",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80",
+    image: "/images/cybersecurity.jpg",
   },
   {
     icon: Cpu, title: "Digital Transformation",
     desc: "End-to-end digital strategy to modernize operations and drive innovation.",
     color: "#ef4444",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80",
+    image: "/images/digitaltransformation.jpg",
   },
 ];
 
@@ -68,21 +68,21 @@ const testimonials = [
     name: "Sarah Chen",
     role: "CTO, NexaScale",
     text: "Maven AI transformed our entire data pipeline. The AI solutions they built cut our processing time by 80% and the quality is unmatched.",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80",
+    avatar: "/images/sarahchen.jpg",
     rating: 5,
   },
   {
     name: "Marcus Reid",
     role: "CEO, Vortex Labs",
     text: "Partnering with Maven AI was the best decision we made this year. Their cloud migration was flawless and ahead of schedule.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80",
+    avatar: "/images/marcusreid.jpg",
     rating: 5,
   },
   {
     name: "Priya Sharma",
     role: "Head of Product, Luminary",
     text: "The web platform they built for us handles 10x our original traffic. Beautiful design, rock-solid engineering.",
-    avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&q=80",
+    avatar: "/images/priyasharma.jpg",
     rating: 5,
   },
 ];
@@ -92,7 +92,7 @@ const caseStudies = [
     label: "AI Automation",
     title: "How FinTech Giant Cut Costs by 60%",
     desc: "We built an AI document processor that eliminated 12,000 man-hours of manual work annually.",
-    image: "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?w=800&q=80",
+    image: "/images/aiautomation.jpg",
     color: "#6366f1",
     tag: "Case Study",
   },
@@ -100,7 +100,7 @@ const caseStudies = [
     label: "Cloud Migration",
     title: "Migrating 50TB to AWS in 30 Days",
     desc: "Zero-downtime cloud migration for a healthcare provider serving 2M patients.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+    image: "/images/cloudmigration.jpg",
     color: "#06b6d4",
     tag: "Case Study",
   },
@@ -641,7 +641,7 @@ const Index = () => {
             >
               <div style={{ borderRadius: 24, overflow: "hidden", position: "relative" }}>
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80"
+                  src="/images/teamworking.jpg"
                   alt="Team working"
                   style={{ width: "100%", height: 420, objectFit: "cover", display: "block" }}
                 />

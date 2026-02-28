@@ -8,25 +8,25 @@ const timeline = [
   {
     year: "2018", title: "Founded",
     desc: "Maven AI Tech was born with a vision to democratize AI for businesses.",
-    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80",
+    image: "/images/founded.jpg",
     color: "#6366f1",
   },
   {
     year: "2020", title: "Growth Phase",
     desc: "Expanded our team and launched cloud-native solutions for enterprise clients.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80",
+    image: "/images/growthphase.jpg",
     color: "#8b5cf6",
   },
   {
     year: "2022", title: "AI-First Pivot",
     desc: "Fully embraced generative AI and machine learning across all service lines.",
-    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80",
+    image: "/images/brainimage.jpg",
     color: "#06b6d4",
   },
   {
     year: "2024", title: "Global Reach",
     desc: "Serving 150+ clients worldwide with a team of 50+ engineers and strategists.",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",
+    image: "/images/globalreach.jpg",
     color: "#10b981",
   },
 ];
@@ -40,22 +40,22 @@ const values = [
 const team = [
   {
     name: "Alex Monroe", role: "CEO & Co-Founder",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80",
+    avatar: "/images/alexmonroe.jpg",
     bio: "Former Google engineer with 15 years in AI research.",
   },
   {
     name: "Priya Nair", role: "CTO",
-    avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80",
+    avatar: "/images/priyasharma.jpg",
     bio: "PhD in ML, previously led AI at two unicorn startups.",
   },
   {
     name: "Jordan Kim", role: "Head of Design",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80",
+    avatar: "/images/marcusreid.jpg",
     bio: "Award-winning designer focused on human-centred AI experiences.",
   },
   {
     name: "Sophie Laurent", role: "VP of Engineering",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80",
+    avatar: "/images/sophielaurent.jpg",
     bio: "Scaled engineering teams from 5 to 200 at Fortune 500s.",
   },
 ];
@@ -66,7 +66,18 @@ const awards = [
   { label: "Innovation Award", year: "2024", org: "Gartner" },
 ];
 
-// ── Magnetic Button ────────────────────────────────────────────────────────────
+// ── Divider ────────────────────────────────────────────────────────────────────
+function SectionDivider({ color = "#6366f1" }) {
+  return (
+    <div style={{
+      height: 1,
+      background: `linear-gradient(90deg, transparent, ${color}40, ${color}20, transparent)`,
+      width: "100%",
+    }} />
+  );
+}
+
+// ── Morphing Blob ──────────────────────────────────────────────────────────────
 function MorphingBlob({ color = "#6366f1", size = 300, delay = 0, style = {} }) {
   const variants = {
     a: { borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%", scale: 1 },
@@ -76,8 +87,8 @@ function MorphingBlob({ color = "#6366f1", size = 300, delay = 0, style = {} }) 
   return (
     <motion.div
       style={{ width: size, height: size, background: `radial-gradient(circle at 40% 40%, ${color}44, ${color}0a)`, filter: "blur(50px)", position: "absolute", ...style }}
-      variants={variants} initial="a" animate={["a","b","c","a"]}
-      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay, times: [0,0.33,0.66,1] }}
+      variants={variants} initial="a" animate={["a", "b", "c", "a"]}
+      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay, times: [0, 0.33, 0.66, 1] }}
     />
   );
 }
@@ -218,12 +229,12 @@ const About = () => {
     <div className="min-h-screen pt-24" style={{ position: "relative" }}>
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
         <MorphingBlob color="#6366f1" size={500} delay={0} style={{ top: "-20%", left: "-10%", zIndex: 0 }} />
         <MorphingBlob color="#8b5cf6" size={350} delay={4} style={{ bottom: "-10%", right: "-8%", zIndex: 0 }} />
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-14 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             {/* Left text */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -284,7 +295,7 @@ const About = () => {
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               >
-                <img src="https://i.pinimg.com/1200x/60/13/1a/60131aa0275f15e336a15d4233733e11.jpg" alt="Team" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src="/images/team.jpg" alt="Team" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(99,102,241,0.25), transparent)" }} />
               </motion.div>
 
@@ -294,7 +305,7 @@ const About = () => {
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               >
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="Work" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src="/images/teamworking.jpg" alt="Work" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(139,92,246,0.2)" }} />
               </motion.div>
 
@@ -318,10 +329,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── MISSION & VISION (ENHANCED) ───────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden" style={{ background: "rgba(99,102,241,0.02)" }}>
+      <SectionDivider color="#6366f1" />
+
+      {/* ── MISSION & VISION ──────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden" style={{ background: "rgba(99,102,241,0.02)" }}>
         <div className="container mx-auto px-6">
-          <ScrollReveal className="text-center mb-14">
+          <ScrollReveal className="text-center mb-10 md:mb-14">
             <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>Core Beliefs</motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold">
               What We <span className="gradient-text">Stand For</span>
@@ -332,12 +345,12 @@ const About = () => {
             {[
               {
                 icon: Target, title: "Our Mission", color: "#6366f1",
-                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80",
+                image: "/images/ourmission.jpg",
                 text: "To empower organizations of every size with accessible, scalable AI solutions that drive real business impact — reducing costs, accelerating growth, and unlocking innovation.",
               },
               {
                 icon: Eye, title: "Our Vision", color: "#8b5cf6",
-                image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=700&q=80",
+                image: "/images/ourvision.jpg",
                 text: "A world where every business — from startup to enterprise — can leverage cutting-edge AI and technology to make smarter decisions and create extraordinary experiences.",
               },
             ].map((card, i) => (
@@ -377,13 +390,25 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── VALUES (ENHANCED) ─────────────────────────────────────────────── */}
-      <section className="py-24 relative overflow-hidden">
+      <SectionDivider color="#8b5cf6" />
+
+      {/* ── VALUES ────────────────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=40" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.03 }} />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: "url('/images/chip.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: 0.08,
+              filter: "grayscale(100%)"
+            }}
+          />
         </div>
         <div className="container mx-auto px-6 relative z-10">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10 md:mb-14">
             <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>Our DNA</motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
               What Drives <span className="gradient-text">Us</span>
@@ -420,10 +445,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── TIMELINE (ENHANCED) ───────────────────────────────────────────── */}
-      <section className="py-24" style={{ background: "rgba(99,102,241,0.02)" }}>
+      <SectionDivider color="#06b6d4" />
+
+      {/* ── TIMELINE ──────────────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16 lg:py-20" style={{ background: "rgba(99,102,241,0.02)" }}>
         <div className="container mx-auto px-6">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10 md:mb-14">
             <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>Timeline</motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
               Our <span className="gradient-text">Journey</span>
@@ -439,10 +466,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── TEAM (NEW) ────────────────────────────────────────────────────── */}
-      <section className="py-24">
+      <SectionDivider color="#10b981" />
+
+      {/* ── TEAM ──────────────────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-6">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10 md:mb-14">
             <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>The Team</motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
               Meet the <span className="gradient-text">Minds</span> Behind Maven
@@ -457,10 +486,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── AWARDS STRIP (NEW) ────────────────────────────────────────────── */}
-      <section className="py-16" style={{ background: "rgba(99,102,241,0.03)", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <SectionDivider color="#f59e0b" />
+
+      {/* ── AWARDS STRIP ──────────────────────────────────────────────────── */}
+      <section className="py-10 md:py-14" style={{ background: "rgba(99,102,241,0.03)" }}>
         <div className="container mx-auto px-6">
-          <div className="flex flex-wrap justify-center items-center gap-10">
+          <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10">
             <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.35 }}>Recognized by</p>
             {awards.map((a, i) => (
               <motion.div
@@ -479,6 +510,8 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <SectionDivider color="#6366f1" />
 
       <CTASection />
     </div>

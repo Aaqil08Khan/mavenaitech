@@ -10,57 +10,57 @@ import CTASection from "@/components/CTASection";
 const services = [
   {
     icon: Brain, title: "AI & Machine Learning", color: "#6366f1",
-    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80",
+    image: "/images/brainimage.jpg",
     desc: "Custom AI models, natural language processing, computer vision, and predictive analytics tailored to solve your unique challenges.",
     highlights: ["Custom LLM fine-tuning", "Computer Vision", "Predictive Analytics"],
     badge: "Most Popular",
   },
   {
     icon: Globe, title: "Web Development", color: "#8b5cf6",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80",
+    image: "/images/globalwebdevelopment.jpg",
     desc: "Full-stack web applications using React, Next.js, and modern frameworks — fast, responsive, and beautifully designed.",
     highlights: ["React / Next.js", "Performance-first", "SEO Optimized"],
   },
   {
     icon: Cloud, title: "Cloud Solutions", color: "#06b6d4",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80",
+    image: "/images/cloudservice.jpg",
     desc: "Cloud architecture, migration, and managed services on AWS, Azure, and GCP for maximum reliability and scalability.",
     highlights: ["AWS / Azure / GCP", "Zero-downtime migration", "Auto-scaling"],
   },
   {
     icon: BarChart3, title: "Data Analytics", color: "#10b981",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+    image: "/images/dataanalyst.jpg",
     desc: "Business intelligence dashboards, ETL pipelines, and advanced data visualization to turn data into decisions.",
     highlights: ["BI Dashboards", "ETL Pipelines", "Real-time Insights"],
   },
   {
     icon: Shield, title: "Cybersecurity", color: "#f59e0b",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80",
+    image: "/images/cybersecurity.jpg",
     desc: "Penetration testing, compliance auditing, and real-time threat monitoring to keep your digital assets secure.",
     highlights: ["Pen Testing", "SOC 2 Compliance", "24/7 Monitoring"],
     badge: "Critical",
   },
   {
     icon: Cpu, title: "Digital Transformation", color: "#ef4444",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80",
+    image: "/images/digitaltransformation.jpg",
     desc: "Strategic consulting and implementation to modernize legacy systems and streamline business operations.",
     highlights: ["Legacy Modernization", "Process Automation", "Strategy Consulting"],
   },
   {
     icon: Smartphone, title: "Mobile Development", color: "#ec4899",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80",
+    image: "/images/mobiledevelopment.jpg",
     desc: "Cross-platform mobile apps with React Native and Flutter for seamless iOS and Android experiences.",
     highlights: ["React Native", "Flutter", "App Store Launch"],
   },
   {
     icon: Database, title: "Database Engineering", color: "#14b8a6",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80",
+    image: "/images/databaseengineering.jpg",
     desc: "Design, optimization, and management of SQL and NoSQL databases for high-performance applications.",
     highlights: ["PostgreSQL / MongoDB", "Query Optimization", "High Availability"],
   },
   {
     icon: Code, title: "API Development", color: "#a855f7",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80",
+    image: "/images/apidevelopment.jpg",
     desc: "RESTful and GraphQL APIs built for scalability, security, and seamless third-party integrations.",
     highlights: ["REST & GraphQL", "OAuth / JWT", "API Documentation"],
   },
@@ -288,12 +288,12 @@ const Services = () => {
               className="hidden lg:block"
             >
               <motion.div style={{ position: "absolute", top: 0, left: "5%", right: 0, height: 260, borderRadius: 20, overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,0.35)" }} animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80" alt="Services" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src="/images/services.jpg" alt="Services" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(99,102,241,0.3), transparent)" }} />
               </motion.div>
 
               <motion.div style={{ position: "absolute", bottom: 0, left: 0, width: "46%", height: 180, borderRadius: 16, overflow: "hidden", boxShadow: "0 20px 50px rgba(0,0,0,0.3)" }} animate={{ y: [0, 8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80" alt="Code" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src="/images/code.jpg" alt="Code" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(6,182,212,0.2)" }} />
               </motion.div>
 
@@ -328,7 +328,7 @@ const Services = () => {
       {/* ── PROCESS ───────────────────────────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden" style={{ background: "rgba(99,102,241,0.02)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=40" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.03 }} />
+          <img src="/images/chip.jpg" alt="chip" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.03 }} />
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <ScrollReveal className="text-center mb-16">
@@ -356,7 +356,7 @@ const Services = () => {
           style={{ position: "relative", height: 320, overflow: "hidden" }}
         >
           <img
-            src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1600&q=80"
+            src="/images/technology.jpg"
             alt="Technology"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />

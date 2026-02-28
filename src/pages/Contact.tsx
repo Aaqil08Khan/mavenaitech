@@ -1,7 +1,6 @@
-import { useState, FormEvent } from "react";
-import { Mail, MapPin, Phone, Send, ArrowRight, MessageSquare, Clock, CheckCircle } from "lucide-react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { useState } from "react";
+import { Mail, MapPin, Phone, Send, MessageSquare, Clock, CheckCircle, Calendar } from "lucide-react";
+import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import { toast } from "sonner";
 
@@ -21,27 +20,62 @@ function MorphingBlob({ color = "#6366f1", size = 300, delay = 0, style = {} }) 
   );
 }
 
-function FloatingInput({ label, children }) {
+function FloatingInput({ label, error, required, children }) {
   return (
     <div style={{ position: "relative" }}>
       <label style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", opacity: 0.55, display: "block", marginBottom: 8 }}>
-        {label}
+        {label}{required && <span style={{ color: "#ef4444", marginLeft: 3 }}>*</span>}
       </label>
       {children}
+      {error && (
+        <motion.p
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          style={{ fontSize: 11, color: "#ef4444", marginTop: 5, fontWeight: 600 }}
+        >
+          {error}
+        </motion.p>
+      )}
     </div>
   );
 }
 
+// ── Validation ─────────────────────────────────────────────────────────────────
+function validate(form) {
+  const errors = {};
+  if (!form.name.trim()) errors.name = "Name is required.";
+  if (!form.email.trim()) {
+    errors.email = "Email is required.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    errors.email = "Enter a valid email address (e.g. you@company.com).";
+  }
+  if (!form.message.trim()) errors.message = "Please write a message.";
+  else if (form.message.trim().length < 10) errors.message = "Message must be at least 10 characters.";
+  return errors;
+}
+
+// ── Calendly URL — replace with your actual Calendly link ─────────────────────
+const CALENDLY_URL = "https://calendly.com/YOUR_USERNAME/consultation";
+
 // ── Main ───────────────────────────────────────────────────────────────────────
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+  const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
-  const [focused, setFocused] = useState<string | null>(null);
+  const [focused, setFocused] = useState(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleChange = (field, value) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    // Clear error on change
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill in all fields.");
+    const validationErrors = validate(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      toast.error("Please fix the errors before submitting.");
       return;
     }
     setSending(true);
@@ -49,32 +83,47 @@ const Contact = () => {
       setSending(false);
       toast.success("Message sent! We'll get back to you shortly.");
       setForm({ name: "", email: "", company: "", message: "" });
+      setErrors({});
     }, 1200);
   };
 
-  const inputStyle = (field: string) => ({
+  const inputStyle = (field) => ({
     width: "100%",
-    background: focused === field ? "rgba(99,102,241,0.08)" : "rgba(255,255,255,0.03)",
-    border: `1px solid ${focused === field ? "rgba(99,102,241,0.6)" : "rgba(255,255,255,0.08)"}`,
+    background: errors[field]
+      ? "rgba(239,68,68,0.06)"
+      : focused === field
+      ? "rgba(99,102,241,0.08)"
+      : "rgba(255,255,255,0.03)",
+    border: `1px solid ${
+      errors[field]
+        ? "rgba(239,68,68,0.6)"
+        : focused === field
+        ? "rgba(99,102,241,0.6)"
+        : "rgba(255,255,255,0.08)"
+    }`,
     borderRadius: 12,
     padding: "13px 16px",
     fontSize: 14,
     color: "var(--foreground)",
     outline: "none",
     transition: "all 0.25s ease",
-    boxShadow: focused === field ? "0 0 0 3px rgba(99,102,241,0.12)" : "none",
+    boxShadow: errors[field]
+      ? "0 0 0 3px rgba(239,68,68,0.10)"
+      : focused === field
+      ? "0 0 0 3px rgba(99,102,241,0.12)"
+      : "none",
   });
 
   return (
     <div className="min-h-screen pt-24" style={{ position: "relative" }}>
 
       {/* ── HERO SECTION ──────────────────────────────────────────────────── */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
         <MorphingBlob color="#6366f1" size={500} delay={0} style={{ top: "-20%", left: "-10%", zIndex: 0 }} />
         <MorphingBlob color="#8b5cf6" size={350} delay={4} style={{ bottom: "-10%", right: "-8%", zIndex: 0 }} />
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
             {/* Left */}
             <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <motion.span
@@ -85,12 +134,12 @@ const Contact = () => {
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                 Get in <span className="gradient-text">Touch</span>
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-md">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-md">
                 Have a project in mind? Let's talk about how Maven AI Tech can help you achieve your goals.
               </p>
 
               {/* Trust badges */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
                 {[
                   { icon: Clock, text: "We respond within 24 hours" },
                   { icon: CheckCircle, text: "Free initial consultation call" },
@@ -110,6 +159,39 @@ const Contact = () => {
                   </motion.div>
                 ))}
               </div>
+
+              {/* ── Book a Consultation Button ─────────────────────────────── */}
+              <motion.a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.03, boxShadow: "0 16px 50px rgba(16,185,129,0.35)" }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  padding: "14px 26px",
+                  borderRadius: 14,
+                  background: "linear-gradient(135deg, #10b981, #059669)",
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: 15,
+                  textDecoration: "none",
+                  boxShadow: "0 8px 30px rgba(16,185,129,0.25)",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <Calendar size={18} />
+                Book a Free Consultation
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ display: "inline-block" }}
+                >→</motion.span>
+              </motion.a>
+              <p style={{ fontSize: 12, opacity: 0.4, marginTop: 10 }}>Opens Calendly — pick a date & time that works for you.</p>
             </motion.div>
 
             {/* Right — image */}
@@ -126,14 +208,14 @@ const Contact = () => {
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               >
                 <img
-                  src="https://i.pinimg.com/736x/ad/8b/97/ad8b9763024473e87f037fee275b19cd.jpg"
+                  src="/images/teammeeting.jpg"
                   alt="Team meeting"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(99,102,241,0.35), rgba(0,0,0,0.4))" }} />
               </motion.div>
 
-              {/* Floating "response time" card */}
+              {/* Floating response time card */}
               <motion.div
                 className="glass-card rounded-2xl p-4"
                 style={{ position: "absolute", bottom: 28, left: -24, boxShadow: "0 20px 60px rgba(0,0,0,0.3)", minWidth: 200 }}
@@ -173,58 +255,60 @@ const Contact = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               <div className="glass-card rounded-2xl p-8" style={{ position: "relative", overflow: "hidden" }}>
-                {/* Subtle glow */}
                 <div style={{ position: "absolute", top: -60, left: -60, width: 200, height: 200, background: "radial-gradient(circle, rgba(99,102,241,0.12), transparent)", pointerEvents: "none" }} />
 
-                <h2 className="font-display text-2xl font-bold mb-2">Send Us a Message</h2>
-                <p style={{ fontSize: 14, opacity: 0.5, marginBottom: 28 }}>We read every message personally.</p>
+                <h2 className="font-display text-2xl font-bold mb-1">Send Us a Message</h2>
+                <p style={{ fontSize: 14, opacity: 0.5, marginBottom: 6 }}>We read every message personally.</p>
+                <p style={{ fontSize: 12, opacity: 0.4, marginBottom: 24 }}>
+                  Fields marked <span style={{ color: "#ef4444" }}>*</span> are required.
+                </p>
 
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <FloatingInput label="Your Name">
+                    <FloatingInput label="Your Name" required error={errors.name}>
                       <input
                         type="text"
                         value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        onChange={(e) => handleChange("name", e.target.value)}
                         onFocus={() => setFocused("name")}
                         onBlur={() => setFocused(null)}
-                        style={inputStyle("name") as any}
+                        style={inputStyle("name")}
                         placeholder="John Smith"
                       />
                     </FloatingInput>
-                    <FloatingInput label="Company (Optional)">
+                    <FloatingInput label="Company" error={errors.company}>
                       <input
                         type="text"
                         value={form.company}
-                        onChange={(e) => setForm({ ...form, company: e.target.value })}
+                        onChange={(e) => handleChange("company", e.target.value)}
                         onFocus={() => setFocused("company")}
                         onBlur={() => setFocused(null)}
-                        style={inputStyle("company") as any}
-                        placeholder="Acme Inc."
+                        style={inputStyle("company")}
+                        placeholder="Acme Inc. (optional)"
                       />
                     </FloatingInput>
                   </div>
 
-                  <FloatingInput label="Email Address">
+                  <FloatingInput label="Email Address" required error={errors.email}>
                     <input
                       type="email"
                       value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      onChange={(e) => handleChange("email", e.target.value)}
                       onFocus={() => setFocused("email")}
                       onBlur={() => setFocused(null)}
-                      style={inputStyle("email") as any}
+                      style={inputStyle("email")}
                       placeholder="you@company.com"
                     />
                   </FloatingInput>
 
-                  <FloatingInput label="Message">
+                  <FloatingInput label="Message" required error={errors.message}>
                     <textarea
                       value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      onChange={(e) => handleChange("message", e.target.value)}
                       onFocus={() => setFocused("message")}
                       onBlur={() => setFocused(null)}
                       rows={5}
-                      style={{ ...inputStyle("message") as any, resize: "none" }}
+                      style={{ ...inputStyle("message"), resize: "none" }}
                       placeholder="Tell us about your project, goals, and timeline..."
                     />
                   </FloatingInput>
@@ -247,6 +331,41 @@ const Contact = () => {
                     )}
                   </motion.button>
                 </form>
+
+                {/* Divider */}
+                <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "24px 0" }}>
+                  <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }} />
+                  <span style={{ fontSize: 12, opacity: 0.35, fontWeight: 600 }}>OR</span>
+                  <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }} />
+                </div>
+
+                {/* Calendly CTA inside form card */}
+                <motion.a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02, boxShadow: "0 10px 40px rgba(16,185,129,0.25)" }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 10,
+                    width: "100%",
+                    padding: "13px",
+                    borderRadius: 12,
+                    background: "rgba(16,185,129,0.1)",
+                    border: "1px solid rgba(16,185,129,0.3)",
+                    color: "#10b981",
+                    fontWeight: 700,
+                    fontSize: 14,
+                    textDecoration: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Calendar size={16} />
+                  Or Book a Free Consultation Call
+                </motion.a>
               </div>
             </motion.div>
 
@@ -290,7 +409,7 @@ const Contact = () => {
                 transition={{ duration: 0.3 }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80"
+                  src="/images/office.jpg"
                   alt="Office"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
@@ -316,7 +435,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* ── MAP / FULL WIDTH IMAGE STRIP ──────────────────────────────────── */}
+      {/* ── MAP STRIP ─────────────────────────────────────────────────────── */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -325,7 +444,7 @@ const Contact = () => {
         style={{ position: "relative", height: 280, overflow: "hidden", marginTop: 40 }}
       >
         <img
-          src="https://images.unsplash.com/photo-1524813686514-a57563d77965?w=1600&q=70"
+          src="/images/hyderabadcity.jpg"
           alt="Hyderabad city"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
