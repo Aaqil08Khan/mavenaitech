@@ -1,64 +1,88 @@
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import { Target, Eye, Lightbulb, Rocket, Users, Award, Globe, ArrowRight, ChevronRight } from "lucide-react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  AnimatePresence,
+} from "framer-motion";
+import {
+  Target,
+  Eye,
+  Lightbulb,
+  Rocket,
+  Users,
+  Award,
+  Globe,
+  ArrowRight,
+} from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CTASection from "@/components/CTASection";
 
 const timeline = [
   {
-    year: "2018", title: "Founded",
-    desc: "Maven AI Tech was born with a vision to democratize AI for businesses.",
+    year: "Nov 2023",
+    title: "Founded",
+    desc: "Maven AI Tech was officially founded in November 2023 with a bold vision to democratize AI and make enterprise-grade technology accessible to growing businesses.",
     image: "/images/founded.jpg",
     color: "#6366f1",
   },
   {
-    year: "2020", title: "Growth Phase",
-    desc: "Expanded our team and launched cloud-native solutions for enterprise clients.",
+    year: "Aug 2024",
+    title: "Growth Phase",
+    desc: "By August 2024, we expanded our core team, strengthened our technical capabilities, and began delivering scalable cloud-native AI solutions to enterprise clients.",
     image: "/images/growthphase.jpg",
     color: "#8b5cf6",
   },
   {
-    year: "2022", title: "AI-First Pivot",
-    desc: "Fully embraced generative AI and machine learning across all service lines.",
-    image: "/images/brainimage.jpg",
-    color: "#06b6d4",
-  },
-  {
-    year: "2024", title: "Global Reach",
-    desc: "Serving 150+ clients worldwide with a team of 50+ engineers and strategists.",
+    year: "Jun 2025",
+    title: "Global Reach",
+    desc: "In June 2025, Maven AI Tech reached a major milestone — serving 10+ clients globally across multiple industries with a rapidly growing team of engineers and strategists.",
     image: "/images/globalreach.jpg",
     color: "#10b981",
+  },
+  {
+    year: "Nov 2025",
+    title: "Product-Based R&D",
+    desc: "Transitioned into product-driven innovation in November 2025 by launching internal R&D initiatives and developing our own AI-powered products for the market.",
+    image: "/images/productrd.jpg",
+    color: "#f59e0b",
+  },
+  {
+    year: "Present",
+    title: "Where We Stand Today",
+    desc: "Today, Maven AI Tech continues to grow with 35+ team members, 10+ global clients, active R&D projects, and a strong focus on building scalable AI solutions and proprietary products.",
+    image: "/images/present.jpg",
+    color: "#06b6d4",
   },
 ];
 
 const values = [
-  { icon: Lightbulb, title: "Innovation", desc: "We push boundaries and explore emerging technologies to stay ahead.", color: "#f59e0b" },
-  { icon: Target, title: "Impact", desc: "Every project is measured by the tangible value it creates for our clients.", color: "#6366f1" },
-  { icon: Rocket, title: "Speed", desc: "Agile processes ensure fast delivery without compromising quality.", color: "#ef4444" },
+  {
+    icon: Lightbulb,
+    title: "Innovation",
+    desc: "We push boundaries and explore emerging technologies to stay ahead.",
+    color: "#f59e0b",
+  },
+  {
+    icon: Target,
+    title: "Impact",
+    desc: "Every project is measured by the tangible value it creates for our clients.",
+    color: "#6366f1",
+  },
+  {
+    icon: Rocket,
+    title: "Speed",
+    desc: "Agile processes ensure fast delivery without compromising quality.",
+    color: "#ef4444",
+  },
 ];
 
-const team = [
-  {
-    name: "Alex Monroe", role: "CEO & Co-Founder",
-    avatar: "/images/alexmonroe.jpg",
-    bio: "Former Google engineer with 15 years in AI research.",
-  },
-  {
-    name: "Priya Nair", role: "CTO",
-    avatar: "/images/priyasharma.jpg",
-    bio: "PhD in ML, previously led AI at two unicorn startups.",
-  },
-  {
-    name: "Jordan Kim", role: "Head of Design",
-    avatar: "/images/marcusreid.jpg",
-    bio: "Award-winning designer focused on human-centred AI experiences.",
-  },
-  {
-    name: "Sophie Laurent", role: "VP of Engineering",
-    avatar: "/images/sophielaurent.jpg",
-    bio: "Scaled engineering teams from 5 to 200 at Fortune 500s.",
-  },
-];
+const founder = {
+  name: "Mohammad Aslam Hyder Qureshi Bilal",
+  role: "CEO & Co-Founder",
+  avatar: "/images/alexmonroe.jpg",
+  bio: "Former Google engineer with 15 years in AI research.",
+};
 
 const awards = [
   { label: "Best AI Company", year: "2023", org: "TechCrunch" },
@@ -69,11 +93,13 @@ const awards = [
 // ── Divider ────────────────────────────────────────────────────────────────────
 function SectionDivider({ color = "#6366f1" }) {
   return (
-    <div style={{
-      height: 1,
-      background: `linear-gradient(90deg, transparent, ${color}40, ${color}20, transparent)`,
-      width: "100%",
-    }} />
+    <div
+      style={{
+        height: 1,
+        background: `linear-gradient(90deg, transparent, ${color}40, ${color}20, transparent)`,
+        width: "100%",
+      }}
+    />
   );
 }
 
@@ -86,70 +112,53 @@ function MorphingBlob({ color = "#6366f1", size = 300, delay = 0, style = {} }) 
   };
   return (
     <motion.div
-      style={{ width: size, height: size, background: `radial-gradient(circle at 40% 40%, ${color}44, ${color}0a)`, filter: "blur(50px)", position: "absolute", ...style }}
-      variants={variants} initial="a" animate={["a", "b", "c", "a"]}
-      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay, times: [0, 0.33, 0.66, 1] }}
+      style={{
+        width: size,
+        height: size,
+        background: `radial-gradient(circle at 40% 40%, ${color}44, ${color}0a)`,
+        filter: "blur(50px)",
+        position: "absolute",
+        ...style,
+      }}
+      variants={variants}
+      initial="a"
+      animate={["a", "b", "c", "a"]}
+      transition={{
+        duration: 12,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+        times: [0, 0.33, 0.66, 1],
+      }}
     />
   );
 }
 
 function TiltCard({ children, style = {} }) {
   const ref = useRef(null);
-  const rx = useMotionValue(0); const ry = useMotionValue(0);
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
   const srx = useSpring(rx, { stiffness: 150, damping: 20 });
   const sry = useSpring(ry, { stiffness: 150, damping: 20 });
   const handleMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
-    rx.set(-(((e.clientY - rect.top) / rect.height) - 0.5) * 12);
-    ry.set((((e.clientX - rect.left) / rect.width) - 0.5) * 12);
+    rx.set(-((e.clientY - rect.top) / rect.height - 0.5) * 12);
+    ry.set(((e.clientX - rect.left) / rect.width - 0.5) * 12);
   };
   return (
-    <motion.div ref={ref} onMouseMove={handleMove} onMouseLeave={() => { rx.set(0); ry.set(0); }}
-      style={{ rotateX: srx, rotateY: sry, transformStyle: "preserve-3d", transformPerspective: 900, ...style }}>
-      {children}
-    </motion.div>
-  );
-}
-
-// ── Team Card ──────────────────────────────────────────────────────────────────
-function TeamCard({ member, index }) {
-  const [hovered, setHovered] = useState(false);
-  return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      ref={ref}
+      onMouseMove={handleMove}
+      onMouseLeave={() => { rx.set(0); ry.set(0); }}
+      style={{
+        rotateX: srx,
+        rotateY: sry,
+        transformStyle: "preserve-3d",
+        transformPerspective: 900,
+        ...style,
+      }}
     >
-      <TiltCard>
-        <motion.div
-          className="glass-card rounded-2xl overflow-hidden cursor-pointer"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {/* Photo */}
-          <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
-            <motion.img
-              src={member.avatar} alt={member.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              animate={{ scale: hovered ? 1.07 : 1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8) 100%)" }} />
-            <motion.div
-              style={{ position: "absolute", inset: 0, background: "rgba(99,102,241,0.2)" }}
-              animate={{ opacity: hovered ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-          {/* Info */}
-          <div style={{ padding: "20px 20px 22px" }}>
-            <h3 style={{ fontWeight: 700, fontSize: 16, marginBottom: 3 }}>{member.name}</h3>
-            <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 600, marginBottom: 8, letterSpacing: "0.04em" }}>{member.role}</div>
-            <p style={{ fontSize: 13, opacity: 0.55, lineHeight: 1.6 }}>{member.bio}</p>
-          </div>
-        </motion.div>
-      </TiltCard>
+      {children}
     </motion.div>
   );
 }
@@ -169,7 +178,6 @@ function TimelineItem({ item, index, total }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Card */}
       <div className="flex-1">
         <TiltCard>
           <motion.div
@@ -177,10 +185,10 @@ function TimelineItem({ item, index, total }) {
             animate={{ boxShadow: hovered ? `0 20px 60px ${item.color}33` : "none" }}
             transition={{ duration: 0.3 }}
           >
-            {/* Image */}
             <div style={{ position: "relative", height: 160, overflow: "hidden" }}>
               <motion.img
-                src={item.image} alt={item.title}
+                src={item.image}
+                alt={item.title}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 animate={{ scale: hovered ? 1.06 : 1 }}
                 transition={{ duration: 0.5 }}
@@ -195,7 +203,6 @@ function TimelineItem({ item, index, total }) {
         </TiltCard>
       </div>
 
-      {/* Center node */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0, position: "relative" }}>
         <motion.div
           style={{
@@ -203,22 +210,77 @@ function TimelineItem({ item, index, total }) {
             background: `linear-gradient(135deg, ${item.color}, ${item.color}88)`,
             display: "flex", alignItems: "center", justifyContent: "center",
             boxShadow: hovered ? `0 0 40px ${item.color}88` : `0 0 20px ${item.color}44`,
-            transition: "box-shadow 0.3s",
-            zIndex: 2,
+            transition: "box-shadow 0.3s", zIndex: 2,
           }}
           animate={{ scale: hovered ? 1.15 : 1 }}
           transition={{ duration: 0.3 }}
         >
           <span style={{ fontWeight: 900, fontSize: 12, color: "#fff", letterSpacing: "-0.02em" }}>{item.year}</span>
         </motion.div>
-        {/* Vertical connector */}
         {index < total - 1 && (
           <div style={{ width: 2, flex: 1, minHeight: 48, background: `linear-gradient(to bottom, ${item.color}66, transparent)`, marginTop: 8 }} />
         )}
       </div>
 
-      {/* Spacer for opposite side */}
       <div className="flex-1 hidden md:block" />
+    </motion.div>
+  );
+}
+
+// ── Founder Card ──────────────────────────────────────────────────────────────
+function FounderSpotlight({ member }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      style={{ display: "flex", justifyContent: "center" }}
+    >
+      <TiltCard>
+        <motion.div
+          className="glass-card rounded-3xl overflow-hidden"
+          style={{ width: 300, textAlign: "center" }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          animate={{ boxShadow: hovered ? "0 24px 70px rgba(99,102,241,0.3)" : "0 8px 30px rgba(0,0,0,0.2)" }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Top gradient bar */}
+          <div style={{ height: 3, background: "linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4)" }} />
+
+          {/* Photo */}
+          <div style={{ position: "relative", height: 240, overflow: "hidden" }}>
+            <motion.img
+              src={member.avatar}
+              alt={member.name}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              animate={{ scale: hovered ? 1.06 : 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75) 100%)" }} />
+            <motion.div
+              style={{ position: "absolute", inset: 0, background: "rgba(99,102,241,0.18)" }}
+              animate={{ opacity: hovered ? 1 : 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+
+          {/* Info */}
+          <div style={{ padding: "22px 24px 26px" }}>
+            <h3 style={{ fontWeight: 800, fontSize: 17, lineHeight: 1.3, marginBottom: 6 }} className="font-display">
+              {member.name}
+            </h3>
+            <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>
+              {member.role}
+            </div>
+            <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent)", marginBottom: 12 }} />
+            <p style={{ fontSize: 13, opacity: 0.55, lineHeight: 1.65 }}>{member.bio}</p>
+          </div>
+        </motion.div>
+      </TiltCard>
     </motion.div>
   );
 }
@@ -227,7 +289,6 @@ function TimelineItem({ item, index, total }) {
 const About = () => {
   return (
     <div className="min-h-screen pt-24" style={{ position: "relative" }}>
-
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
         <MorphingBlob color="#6366f1" size={500} delay={0} style={{ top: "-20%", left: "-10%", zIndex: 0 }} />
@@ -235,39 +296,37 @@ const About = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            {/* Left text */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <motion.span
-                style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 20 }}
+                style={{
+                  fontSize: 12, fontWeight: 700, letterSpacing: "0.14em",
+                  textTransform: "uppercase", color: "#6366f1",
+                  background: "rgba(99,102,241,0.1)",
+                  border: "1px solid rgba(99,102,241,0.25)",
+                  padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 20,
+                }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-              >Our Story</motion.span>
+              >
+                Our Story
+              </motion.span>
 
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                About{" "}
-                <span className="gradient-text">Maven AI Tech</span>
+                About <span className="gradient-text">Maven AI Tech</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
                 We are a team of engineers, designers, and strategists united by a single mission — to help businesses harness the transformative power of artificial intelligence and modern technology.
               </p>
 
-              {/* Quick stats row */}
               <div className="flex flex-wrap gap-6">
                 {[
-                  { icon: Users, val: "50+", label: "Team Members" },
-                  { icon: Globe, val: "150+", label: "Global Clients" },
-                  { icon: Award, val: "8+", label: "Years of Excellence" },
+                  { icon: Users, val: "35+", label: "Team Members" },
+                  { icon: Globe, val: "50+", label: "Global Clients" },
+                  { icon: Award, val: "3+", label: "Years of Excellence" },
                 ].map((s, i) => (
-                  <motion.div
-                    key={s.label}
-                    className="flex items-center gap-3"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                  <motion.div key={s.label} className="flex items-center gap-3"
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 + i * 0.12 }}
                   >
                     <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(99,102,241,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -282,14 +341,12 @@ const About = () => {
               </div>
             </motion.div>
 
-            {/* Right images collage */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               style={{ position: "relative", height: 420 }}
             >
-              {/* Main large image */}
               <motion.div
                 style={{ position: "absolute", top: 0, left: "10%", right: 0, height: 280, borderRadius: 20, overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,0.35)" }}
                 animate={{ y: [0, -10, 0] }}
@@ -299,7 +356,6 @@ const About = () => {
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(99,102,241,0.25), transparent)" }} />
               </motion.div>
 
-              {/* Bottom-left smaller image */}
               <motion.div
                 style={{ position: "absolute", bottom: 0, left: 0, width: "48%", height: 180, borderRadius: 16, overflow: "hidden", boxShadow: "0 20px 50px rgba(0,0,0,0.3)" }}
                 animate={{ y: [0, 8, 0] }}
@@ -307,22 +363,6 @@ const About = () => {
               >
                 <img src="/images/teamworking.jpg" alt="Work" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(139,92,246,0.2)" }} />
-              </motion.div>
-
-              {/* Award badge */}
-              <motion.div
-                className="glass-card rounded-xl p-4 flex items-center gap-3"
-                style={{ position: "absolute", bottom: 20, right: 0, boxShadow: "0 16px 40px rgba(0,0,0,0.25)" }}
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-              >
-                <div style={{ width: 38, height: 38, borderRadius: 10, background: "rgba(245,158,11,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Award size={18} color="#f59e0b" />
-                </div>
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: 13 }}>Top AI Company</div>
-                  <div style={{ fontSize: 11, opacity: 0.5 }}>TechCrunch 2023</div>
-                </div>
               </motion.div>
             </motion.div>
           </div>
@@ -335,7 +375,9 @@ const About = () => {
       <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden" style={{ background: "rgba(99,102,241,0.02)" }}>
         <div className="container mx-auto px-6">
           <ScrollReveal className="text-center mb-10 md:mb-14">
-            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>Core Beliefs</motion.span>
+            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>
+              Core Beliefs
+            </motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold">
               What We <span className="gradient-text">Stand For</span>
             </h2>
@@ -343,35 +385,15 @@ const About = () => {
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              {
-                icon: Target, title: "Our Mission", color: "#6366f1",
-                image: "/images/ourmission.jpg",
-                text: "To empower organizations of every size with accessible, scalable AI solutions that drive real business impact — reducing costs, accelerating growth, and unlocking innovation.",
-              },
-              {
-                icon: Eye, title: "Our Vision", color: "#8b5cf6",
-                image: "/images/ourvision.jpg",
-                text: "A world where every business — from startup to enterprise — can leverage cutting-edge AI and technology to make smarter decisions and create extraordinary experiences.",
-              },
+              { icon: Target, title: "Our Mission", color: "#6366f1", image: "/images/ourmission.jpg", text: "To empower organizations of every size with accessible, scalable AI solutions that drive real business impact — reducing costs, accelerating growth, and unlocking innovation." },
+              { icon: Eye, title: "Our Vision", color: "#8b5cf6", image: "/images/ourvision.jpg", text: "A world where every business — from startup to enterprise — can leverage cutting-edge AI and technology to make smarter decisions and create extraordinary experiences." },
             ].map((card, i) => (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
-              >
+              <motion.div key={card.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15, duration: 0.6 }}>
                 <TiltCard>
-                  <motion.div
-                    className="glass-card rounded-2xl overflow-hidden h-full"
-                    whileHover={{ boxShadow: `0 24px 70px ${card.color}33` }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Image header */}
+                  <motion.div className="glass-card rounded-2xl overflow-hidden h-full" whileHover={{ boxShadow: `0 24px 70px ${card.color}33` }} transition={{ duration: 0.3 }}>
                     <div style={{ position: "relative", height: 180, overflow: "hidden" }}>
                       <img src={card.image} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${card.color}55, rgba(0,0,0,0.5))` }} />
-                      {/* Title overlay */}
                       <div style={{ position: "absolute", bottom: 18, left: 22, display: "flex", alignItems: "center", gap: 12 }}>
                         <div style={{ width: 42, height: 42, borderRadius: 12, background: `${card.color}cc`, backdropFilter: "blur(10px)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: `0 0 20px ${card.color}88` }}>
                           <card.icon size={20} color="#fff" />
@@ -395,21 +417,13 @@ const About = () => {
       {/* ── VALUES ────────────────────────────────────────────────────────── */}
       <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage: "url('/images/chip.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              opacity: 0.08,
-              filter: "grayscale(100%)"
-            }}
-          />
+          <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/images/chip.jpg')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.08, filter: "grayscale(100%)" }} />
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <ScrollReveal className="text-center mb-10 md:mb-14">
-            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>Our DNA</motion.span>
+            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>
+              Our DNA
+            </motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
               What Drives <span className="gradient-text">Us</span>
             </h2>
@@ -419,14 +433,11 @@ const About = () => {
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
                 transition={{ delay: i * 0.12, type: "spring", stiffness: 200 }}
                 whileHover={{ y: -8, transition: { duration: 0.2 } }}
               >
                 <div className="glass-card rounded-2xl p-8 text-center h-full" style={{ position: "relative", overflow: "hidden" }}>
-                  {/* Glow background */}
                   <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 50% 0%, ${v.color}18, transparent 70%)`, pointerEvents: "none" }} />
                   <motion.div
                     style={{ width: 64, height: 64, borderRadius: 18, background: `${v.color}1a`, border: `1px solid ${v.color}44`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px", boxShadow: `0 0 30px ${v.color}33` }}
@@ -451,11 +462,15 @@ const About = () => {
       <section className="py-12 md:py-16 lg:py-20" style={{ background: "rgba(99,102,241,0.02)" }}>
         <div className="container mx-auto px-6">
           <ScrollReveal className="text-center mb-10 md:mb-14">
-            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>Timeline</motion.span>
+            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>
+              Timeline
+            </motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
               Our <span className="gradient-text">Journey</span>
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">From a bold idea to a global technology partner — here's how we got here.</p>
+            <p className="text-muted-foreground max-w-lg mx-auto">
+              From a bold idea to a global technology partner — here's how we got here.
+            </p>
           </ScrollReveal>
 
           <div className="max-w-3xl mx-auto">
@@ -468,48 +483,33 @@ const About = () => {
 
       <SectionDivider color="#10b981" />
 
-      {/* ── TEAM ──────────────────────────────────────────────────────────── */}
-      <section className="py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-6">
+      {/* ── FOUNDER SPOTLIGHT ─────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
+        <MorphingBlob color="#6366f1" size={400} delay={2} style={{ top: "10%", right: "-10%", zIndex: 0 }} />
+        <MorphingBlob color="#8b5cf6" size={300} delay={5} style={{ bottom: "5%", left: "-8%", zIndex: 0 }} />
+
+        <div className="container mx-auto px-6 relative z-10">
           <ScrollReveal className="text-center mb-10 md:mb-14">
-            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>The Team</motion.span>
+            <motion.span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>
+              The Visionary
+            </motion.span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Meet the <span className="gradient-text">Minds</span> Behind Maven
+              The Mind <span className="gradient-text">Behind Maven</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              World-class talent united by curiosity and a drive to build what's next.
+              The person who started it all.
             </p>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((m, i) => <TeamCard key={m.name} member={m} index={i} />)}
+
+          <div className="max-w-5xl mx-auto">
+            <FounderSpotlight member={founder} />
           </div>
         </div>
       </section>
 
       <SectionDivider color="#f59e0b" />
 
-      {/* ── AWARDS STRIP ──────────────────────────────────────────────────── */}
-      <section className="py-10 md:py-14" style={{ background: "rgba(99,102,241,0.03)" }}>
-        <div className="container mx-auto px-6">
-          <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10">
-            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.35 }}>Recognized by</p>
-            {awards.map((a, i) => (
-              <motion.div
-                key={a.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -4 }}
-                className="glass-card rounded-xl px-6 py-4 text-center"
-              >
-                <div style={{ fontSize: 11, color: "#f59e0b", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 4 }}>{a.org} · {a.year}</div>
-                <div style={{ fontWeight: 700, fontSize: 15 }}>{a.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+     
 
       <SectionDivider color="#6366f1" />
 
