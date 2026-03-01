@@ -43,10 +43,13 @@ const testimonials = [
 ];
 
 const techStack = [
-  { name: "TensorFlow", logo: "🧠" }, { name: "React", logo: "⚛️" },
-  { name: "AWS",        logo: "☁️" }, { name: "Python", logo: "🐍" },
-  { name: "Kubernetes", logo: "⚙️" }, { name: "PostgreSQL", logo: "🐘" },
-  { name: "Rust",       logo: "🦀" }, { name: "GraphQL", logo: "◈" },
+  { name: "React",      logo: "/images/react.svg" },
+  { name: "AWS",        logo: "/images/aws.png" },
+  { name: "Python",     logo: "/images/python.png" },
+  { name: "PostgreSQL", logo: "/images/postgresql.png" },
+  { name: "GraphQL",    logo: "/images/graphql.png" },
+  { name: "Kotlin",     logo: "/images/kotlin.svg" },
+  { name: "Next.js",    logo: "/images/nextjs.png" },
 ];
 
 const BANNER_WORDS = ["AI Solutions", "Cloud Scale", "Cybersecurity", "Data Insights", "Web Excellence", "Digital Transformation"];
@@ -274,9 +277,22 @@ function TestimonialCard({ t, index }) {
 
 function TechBadge({ tech, index }) {
   return (
-    <motion.div initial={{ opacity: 0, scale: 0.7 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.06, type: "spring", stiffness: 200 }} whileHover={{ y: -6, scale: 1.1 }} className="glass-card rounded-xl flex flex-col items-center gap-2 px-5 py-4 cursor-default">
-      <span style={{ fontSize: 28 }}>{tech.logo}</span>
-      <span style={{ fontSize: 12, fontWeight: 600, opacity: 0.6, letterSpacing: "0.04em" }}>{tech.name}</span>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.7 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.06, type: "spring", stiffness: 200 }}
+      whileHover={{ y: -6, scale: 1.1 }}
+      className="glass-card rounded-xl flex flex-col items-center gap-2 px-5 py-4 cursor-default"
+    >
+      <img
+        src={tech.logo}
+        alt={tech.name}
+        style={{ width: 28, height: 28, objectFit: "contain" }}
+      />
+      <span style={{ fontSize: 12, fontWeight: 600, opacity: 0.6, letterSpacing: "0.04em" }}>
+        {tech.name}
+      </span>
     </motion.div>
   );
 }
@@ -385,7 +401,7 @@ function KnowOurParallels() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <motion.span initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6366f1", background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", padding: "4px 14px", borderRadius: 99, display: "inline-block", marginBottom: 14 }}>What Sets Us Apart</motion.span>
-          <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="font-display text-3xl md:text-4xl font-bold mb-4">Know Our <span className="gradient-text">Parallels</span></motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="font-display text-3xl md:text-4xl font-bold mb-4">Partnership <span className="gradient-text">Benefits</span></motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.18 }} className="text-muted-foreground max-w-xl mx-auto">Our powerful blend of expert minds, transparent processes, rapid execution, and global outlook — this is what makes Maven AI Tech truly unique.</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
