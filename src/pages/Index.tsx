@@ -47,7 +47,6 @@ const techStack = [
   { name: "AWS",        logo: "/images/aws.png" },
   { name: "Python",     logo: "/images/python.png" },
   { name: "PostgreSQL", logo: "/images/postgresql.png" },
-  { name: "GraphQL",    logo: "/images/graphql.png" },
   { name: "Kotlin",     logo: "/images/kotlin.svg" },
   { name: "Next.js",    logo: "/images/nextjs.png" },
 ];

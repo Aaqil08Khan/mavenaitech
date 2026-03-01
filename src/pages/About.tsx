@@ -333,7 +333,7 @@ function BrochureViewer() {
               Explore Our <span className="gradient-text">Full Brochure</span>
             </h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              14 pages covering our story, products, services, and contact details. View-only — no download or print.
+              14 pages covering our story, products, services, and contact details.
             </p>
           </ScrollReveal>
 
