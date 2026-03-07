@@ -28,18 +28,18 @@ const features = [
 ];
 
 const stats = [
-  { target: 200, suffix: "+", label: "Projects Completed" },
-  { target: 150, suffix: "+", label: "Clients Served" },
-  { target: 8,   suffix: "+", label: "Years Experience" },
-  { target: 99,  suffix: "%", label: "Client Satisfaction" },
+  { target: 75, suffix: "+", label: "Projects Completed" },
+  { target: 40, suffix: "+", label: "Clients Served" },
+  { target: 3,   suffix: "+", label: "Years Experience" },
+  { target: 95,  suffix: "%", label: "Client Satisfaction" },
 ];
 
 const WORDS = ["Future", "Vision", "Tomorrow", "Horizon", "Frontier"];
 
 const testimonials = [
-  { name: "Sarah Chen",    role: "CTO, NexaScale",    text: "Maven AI transformed our entire data pipeline. The AI solutions they built cut our processing time by 80% and the quality is unmatched.",              avatar: "/images/sarahchen.jpg",   rating: 5 },
-  { name: "Marcus Reid",   role: "CEO, Vortex Labs",   text: "Partnering with Maven AI was the best decision we made this year. Their cloud migration was flawless and ahead of schedule.",                         avatar: "/images/marcusreid.jpg",  rating: 5 },
-  { name: "Priya Sharma",  role: "Head of Product, Luminary", text: "The web platform they built for us handles 10x our original traffic. Beautiful design, rock-solid engineering.",                            avatar: "/images/priyasharma.jpg", rating: 5 },
+  { name: "Mohammed Amer Ali ",    role: "Founder of Minndful Path",    text: "Maven AI transformed our entire data pipeline. The AI solutions they built cut our processing time by 80% and the quality is unmatched.",              avatar: "/images/CEO.png",   rating: 5 },
+  { name: "Malik Amer ",   role: "Founder of mindfeast, partner of Shaheen Group of Institutions)",   text: "Partnering with Maven AI was the best decision we made this year. Their cloud migration was flawless and ahead of schedule.",                         avatar: "/images/CEO.png",  rating: 5 },
+  { name: "Abdul Rehman",  role: "Founder of Indorizon Travels", text: "The web platform they built for us handles 10x our original traffic. Beautiful design, rock-solid engineering.",                            avatar: "/images/CEO.png", rating: 5 },
 ];
 
 const techStack = [
@@ -248,9 +248,7 @@ function ServiceCard({ service, index }) {
           <div style={{ padding: "20px 20px 24px" }}>
             <h3 className="font-display font-semibold text-lg mb-2">{service.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{service.desc}</p>
-            <motion.div className="flex items-center gap-1 mt-4" style={{ color: service.color, fontSize: 13, fontWeight: 600 }} animate={{ x: hovered ? 4 : 0 }} transition={{ duration: 0.2 }}>
-              Learn more <ChevronRight size={14} />
-            </motion.div>
+          
           </div>
         </motion.div>
       </TiltCard>

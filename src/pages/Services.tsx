@@ -178,14 +178,7 @@ function ServiceCard({ service, index }) {
             </div>
 
             {/* CTA */}
-            <motion.div
-              className="flex items-center gap-1"
-              style={{ color: service.color, fontSize: 13, fontWeight: 700 }}
-              animate={{ x: hovered ? 5 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              Learn more <ChevronRight size={14} />
-            </motion.div>
+            
           </div>
         </motion.div>
       </TiltCard>

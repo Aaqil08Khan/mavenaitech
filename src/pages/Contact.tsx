@@ -1,8 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, MapPin, Phone, Send, MessageSquare, Clock, CheckCircle, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
+
+// ── ✅ REPLACE THIS with your actual Calendly link ─────────────────────────────
+// Example: "https://calendly.com/mavenaitech/consultation"
+const CALENDLY_URL = "https://calendly.com/meet_mavenaitech/30min";
+
+// ── Calendly Popup Hook ────────────────────────────────────────────────────────
+function useCalendly() {
+  useEffect(() => {
+    // Inject Calendly stylesheet (only once)
+    if (!document.getElementById("calendly-css")) {
+      const link = document.createElement("link");
+      link.id = "calendly-css";
+      link.href = "https://assets.calendly.com/assets/external/widget.css";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    }
+
+    // Inject Calendly script (only once)
+    if (!document.getElementById("calendly-script")) {
+      const script = document.createElement("script");
+      script.id = "calendly-script";
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  const openCalendly = (e) => {
+    e?.preventDefault();
+    if (window.Calendly) {
+      // Opens the native Calendly booking modal overlay
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      // Fallback: open in new tab if script hasn't finished loading
+      window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  return { openCalendly };
+}
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 function MorphingBlob({ color = "#6366f1", size = 300, delay = 0, style = {} }) {
@@ -54,11 +95,15 @@ function validate(form) {
   return errors;
 }
 
-// ── Calendly URL — replace with your actual Calendly link ─────────────────────
-const CALENDLY_URL = "https://calendly.com/YOUR_USERNAME/consultation";
-
 // ── Main ───────────────────────────────────────────────────────────────────────
 const Contact = () => {
+
+  const EMAILJS_SERVICE_ID  = "service_7s1nlxg";
+  const EMAILJS_TEMPLATE_ID = "template_1is2g6u";
+  const EMAILJS_PUBLIC_KEY  = "BKHbaqK7BmxxI02oD";
+
+  const { openCalendly } = useCalendly();
+
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
@@ -66,11 +111,10 @@ const Contact = () => {
 
   const handleChange = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-    // Clear error on change
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate(form);
     if (Object.keys(validationErrors).length > 0) {
@@ -78,13 +122,29 @@ const Contact = () => {
       toast.error("Please fix the errors before submitting.");
       return;
     }
+
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  form.name,
+          from_email: form.email,
+          company:    form.company || "Not provided",
+          message:    form.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
       toast.success("Message sent! We'll get back to you shortly.");
       setForm({ name: "", email: "", company: "", message: "" });
       setErrors({});
-    }, 1200);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast.error("Failed to send. Please try again or email us directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputStyle = (field) => ({
@@ -160,11 +220,9 @@ const Contact = () => {
                 ))}
               </div>
 
-              {/* ── Book a Consultation Button ─────────────────────────────── */}
-              <motion.a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* ── Hero Calendly CTA ──────────────────────────────────────── */}
+              <motion.button
+                onClick={openCalendly}
                 whileHover={{ scale: 1.03, boxShadow: "0 16px 50px rgba(16,185,129,0.35)" }}
                 whileTap={{ scale: 0.97 }}
                 style={{
@@ -177,10 +235,9 @@ const Contact = () => {
                   color: "#fff",
                   fontWeight: 700,
                   fontSize: 15,
-                  textDecoration: "none",
-                  boxShadow: "0 8px 30px rgba(16,185,129,0.25)",
                   border: "none",
                   cursor: "pointer",
+                  boxShadow: "0 8px 30px rgba(16,185,129,0.25)",
                 }}
               >
                 <Calendar size={18} />
@@ -190,8 +247,10 @@ const Contact = () => {
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                   style={{ display: "inline-block" }}
                 >→</motion.span>
-              </motion.a>
-              <p style={{ fontSize: 12, opacity: 0.4, marginTop: 10 }}>Opens Calendly — pick a date & time that works for you.</p>
+              </motion.button>
+              <p style={{ fontSize: 12, opacity: 0.4, marginTop: 10 }}>
+                Pick a date & time — a team member will join the call.
+              </p>
             </motion.div>
 
             {/* Right — image */}
@@ -339,11 +398,9 @@ const Contact = () => {
                   <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }} />
                 </div>
 
-                {/* Calendly CTA inside form card */}
-                <motion.a
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                {/* ── Form card Calendly button — triggers popup ─────────── */}
+                <motion.button
+                  onClick={openCalendly}
                   whileHover={{ scale: 1.02, boxShadow: "0 10px 40px rgba(16,185,129,0.25)" }}
                   whileTap={{ scale: 0.97 }}
                   style={{
@@ -359,13 +416,12 @@ const Contact = () => {
                     color: "#10b981",
                     fontWeight: 700,
                     fontSize: 14,
-                    textDecoration: "none",
                     cursor: "pointer",
                   }}
                 >
                   <Calendar size={16} />
                   Or Book a Free Consultation Call
-                </motion.a>
+                </motion.button>
               </div>
             </motion.div>
 
