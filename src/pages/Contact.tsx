@@ -5,9 +5,10 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 
-// ── ✅ REPLACE THIS with your actual Calendly link ─────────────────────────────
-// Example: "https://calendly.com/mavenaitech/consultation"
-const CALENDLY_URL = "https://calendly.com/meet_mavenaitech/30min";
+// ── Private config loaded from .env ───────────────────────────────────────────
+
+
+const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL;
 
 // ── Calendly Popup Hook ────────────────────────────────────────────────────────
 function useCalendly() {
@@ -98,9 +99,9 @@ function validate(form) {
 // ── Main ───────────────────────────────────────────────────────────────────────
 const Contact = () => {
 
-  const EMAILJS_SERVICE_ID  = "service_7s1nlxg";
-  const EMAILJS_TEMPLATE_ID = "template_1is2g6u";
-  const EMAILJS_PUBLIC_KEY  = "BKHbaqK7BmxxI02oD";
+  const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   const { openCalendly } = useCalendly();
 
